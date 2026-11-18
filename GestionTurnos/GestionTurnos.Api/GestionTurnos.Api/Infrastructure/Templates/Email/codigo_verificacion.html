@@ -1,0 +1,28 @@
+<p style="margin:0 0 16px;font-size:15px;color:#1e293b;">Hola, <strong>{{ modelo.nombre | html.escape }}</strong>:</p>
+
+<p style="margin:0 0 16px;font-size:15px;color:#334155;line-height:1.6;">{{ modelo.mensaje | html.escape }}</p>
+
+<!-- Código de Verificación Destacado -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+  <tr>
+    <td align="center">
+      <div style="display:inline-block;padding:16px 36px;background-color:#f0fdfa;border:2px solid #1D768A;border-radius:10px;text-align:center;box-shadow:0 2px 4px rgba(29,118,138,0.08);">
+        <span style="display:block;font-size:11px;font-weight:800;color:#1D768A;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">CÓDIGO DE ACCESO</span>
+        <span style="display:block;font-size:32px;letter-spacing:8px;font-weight:800;font-family:Consolas,'Courier New',monospace;color:#113459;line-height:1.2;">{{ modelo.codigo | html.escape }}</span>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<p style="margin:0 0 16px;font-size:14px;color:#334155;">
+  Este código vence en <strong style="color:#113459;">{{ modelo.minutos_vigencia }} minutos</strong> y solo puede ser utilizado una única vez.
+</p>
+
+<!-- Alerta de Seguridad Accesible (WCAG AA) -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:20px 0 0;background-color:#fef2f2;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;padding:12px 16px;">
+  <tr>
+    <td style="color:#991b1b;font-size:13px;line-height:1.5;">
+      <strong>Advertencia de seguridad:</strong> Nunca comparta este código con nadie. El personal del sistema jamás se lo solicitará por llamada, chat ni correo. Si usted no solicitó este código, cambie su contraseña inmediatamente.
+    </td>
+  </tr>
+</table>

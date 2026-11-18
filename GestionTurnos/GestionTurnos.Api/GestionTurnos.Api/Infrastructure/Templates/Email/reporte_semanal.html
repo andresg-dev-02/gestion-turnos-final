@@ -1,0 +1,123 @@
+<p style="margin:0 0 16px;font-size:15px;color:#1e293b;">Hola, <strong>{{ modelo.nombre | html.escape }}</strong>:</p>
+
+<p style="margin:0 0 20px;font-size:15px;color:#334155;line-height:1.6;">
+  A continuación le presentamos el resumen oficial consolidado de su asistencia y turnos cumplidos para la semana del
+  <strong style="color:#113459;">{{ modelo.desde | html.escape }}</strong> al
+  <strong style="color:#113459;">{{ modelo.hasta | html.escape }}</strong>.
+</p>
+
+<!-- Tarjetas Resumen de Indicadores Clave (KPIs) -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background-color:#ffffff;font-size:14px;">
+  <tr style="background-color:#f0fdfa;border-bottom:2px solid #1D768A;">
+    <td style="padding:10px 14px;color:#113459;font-weight:700;font-size:12px;text-transform:uppercase;width:25%;">Concepto</td>
+    <td style="padding:10px 14px;color:#113459;font-weight:700;font-size:12px;text-transform:uppercase;width:25%;">Valor</td>
+    <td style="padding:10px 14px;color:#113459;font-weight:700;font-size:12px;text-transform:uppercase;width:25%;">Concepto</td>
+    <td style="padding:10px 14px;color:#113459;font-weight:700;font-size:12px;text-transform:uppercase;width:25%;">Valor</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e8f0;">
+    <td style="padding:10px 14px;color:#475569;font-weight:600;">Turnos programados</td>
+    <td style="padding:10px 14px;font-weight:700;color:#113459;">{{ modelo.turnos_programados }}</td>
+    <td style="padding:10px 14px;color:#475569;font-weight:600;">Turnos asistidos</td>
+    <td style="padding:10px 14px;font-weight:700;color:#065f46;">{{ modelo.turnos_asistidos }}</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e8f0;">
+    <td style="padding:10px 14px;color:#475569;font-weight:600;">Horas programadas</td>
+    <td style="padding:10px 14px;font-weight:700;color:#113459;">{{ modelo.horas_programadas | html.escape }}</td>
+    <td style="padding:10px 14px;color:#475569;font-weight:600;">Horas trabajadas</td>
+    <td style="padding:10px 14px;font-weight:700;color:#065f46;">{{ modelo.horas_trabajadas | html.escape }}</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 14px;color:#475569;font-weight:600;">Faltas</td>
+    <td style="padding:10px 14px;font-weight:700;{{ if modelo.faltas > 0 }}color:#991b1b;{{ else }}color:#1e293b;{{ end }}">
+      {{ modelo.faltas }}
+      {{ if modelo.faltas_justificadas > 0 }}
+        <span style="font-weight:500;color:#475569;font-size:12px;">(+{{ modelo.faltas_justificadas }} justif.)</span>
+      {{ end }}
+    </td>
+    <td style="padding:10px 14px;color:#475569;font-weight:600;">Llegadas tarde</td>
+    <td style="padding:10px 14px;font-weight:700;{{ if modelo.llegadas_tarde > 0 }}color:#92400e;{{ else }}color:#1e293b;{{ end }}">
+      {{ modelo.llegadas_tarde }}
+      {{ if modelo.llegadas_tarde > 0 }}
+        <span style="font-weight:500;color:#475569;font-size:12px;">({{ modelo.tiempo_tarde | html.escape }})</span>
+      {{ end }}
+    </td>
+  </tr>
+</table>
+
+<!-- Detalle por Turno -->
+{{ if (modelo.dias | array.size) > 0 }}
+<p style="margin:20px 0 10px;font-weight:800;font-size:15px;color:#113459;">Detalle por turno asignado</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;font-size:13px;margin:0 0 24px;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
+  <thead>
+    <tr style="background-color:#f8fafc;border-bottom:2px solid #cbd5e1;">
+      <th align="left" style="padding:8px 10px;color:#475569;font-weight:700;font-size:12px;">Fecha</th>
+      <th align="left" style="padding:8px 10px;color:#475569;font-weight:700;font-size:12px;">Turno</th>
+      <th align="left" style="padding:8px 10px;color:#475569;font-weight:700;font-size:12px;">Entrada</th>
+      <th align="left" style="padding:8px 10px;color:#475569;font-weight:700;font-size:12px;">Salida</th>
+      <th align="left" style="padding:8px 10px;color:#475569;font-weight:700;font-size:12px;">Trabajado</th>
+      <th align="left" style="padding:8px 10px;color:#475569;font-weight:700;font-size:12px;">Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ for d in modelo.dias }}
+    <tr style="border-bottom:1px solid #e2e8f0;{{ if d.alerta }}background-color:#fef2f2;{{ end }}">
+      <td style="padding:8px 10px;color:#1e293b;font-weight:600;white-space:nowrap;">{{ d.fecha | html.escape }}</td>
+      <td style="padding:8px 10px;color:#1D768A;font-weight:700;">
+        {{ d.turno | html.escape }}<br>
+        <span style="color:#64748b;font-size:11px;font-weight:400;">{{ d.horario | html.escape }}</span>
+      </td>
+      <td style="padding:8px 10px;color:#334155;font-family:Consolas,monospace;">{{ d.entrada | html.escape }}</td>
+      <td style="padding:8px 10px;color:#334155;font-family:Consolas,monospace;">{{ d.salida | html.escape }}</td>
+      <td style="padding:8px 10px;color:#113459;font-weight:700;font-family:Consolas,monospace;">{{ d.trabajado | html.escape }}</td>
+      <td style="padding:8px 10px;font-weight:700;{{ if d.alerta }}color:#991b1b;{{ else }}color:#065f46;{{ end }}">
+        {{ d.estado | html.escape }}
+      </td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
+{{ else }}
+<p style="margin:0 0 20px;color:#64748b;font-style:italic;">No registró turnos programados durante esta semana.</p>
+{{ end }}
+
+<!-- Horas Liquidadas por Categoría -->
+{{ if (modelo.horas_por_categoria | array.size) > 0 }}
+<p style="margin:20px 0 10px;font-weight:800;font-size:15px;color:#113459;">Horas liquidadas por categoría</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background-color:#f8fafc;font-size:14px;">
+  {{ for h in modelo.horas_por_categoria }}
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;width:55%;border-bottom:1px solid #e2e8f0;">{{ h.etiqueta | html.escape }}</td>
+    <td style="padding:10px 16px;color:#113459;font-weight:700;border-bottom:1px solid #e2e8f0;font-family:Consolas,monospace;">{{ h.valor | html.escape }}</td>
+  </tr>
+  {{ end }}
+</table>
+{{ end }}
+
+<!-- Novedades e Incapacidades -->
+{{ if (modelo.novedades | array.size) > 0 }}
+<p style="margin:20px 0 10px;font-weight:800;font-size:15px;color:#113459;">Novedades y permisos aprobados</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background-color:#f8fafc;font-size:14px;">
+  {{ for n in modelo.novedades }}
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;width:55%;border-bottom:1px solid #e2e8f0;vertical-align:top;">{{ n.etiqueta | html.escape }}</td>
+    <td style="padding:10px 16px;color:#1e293b;font-weight:600;border-bottom:1px solid #e2e8f0;">{{ n.valor | html.escape }}</td>
+  </tr>
+  {{ end }}
+</table>
+{{ end }}
+
+<p style="margin:0 0 20px;color:#64748b;font-size:13px;line-height:1.5;">
+  Si encuentra alguna inconsistencia en las horas registradas, por favor notifíquelo a su supervisor de área o al departamento de talento humano.
+</p>
+
+{{ if sistema.url }}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 8px;">
+  <tr>
+    <td align="center">
+      <a href="{{ sistema.url | html.escape }}" style="display:inline-block;padding:14px 32px;background-color:#113459;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(17,52,89,0.2);border-bottom:3px solid #1D768A;">
+        Ver mi asistencia detallada &rarr;
+      </a>
+    </td>
+  </tr>
+</table>
+{{ end }}

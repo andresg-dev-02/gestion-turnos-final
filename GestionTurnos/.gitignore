@@ -1,0 +1,174 @@
+# ==============================================================================
+# .gitignore para Proyecto Fullstack (.NET API + Angular UI)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Compilación y Artefactos de .NET / C#
+# ------------------------------------------------------------------------------
+bin/
+obj/
+debug/
+debugPublic/
+release/
+releases/
+x64/
+x86/
+arm/
+arm64/
+bld/
+build/
+publish/
+**/Properties/PublishProfiles/
+*.publishsettings
+
+# Archivos de usuario y configuración local de Visual Studio
+*.rsuser
+*.suo
+*.user
+*.user.*
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vs/
+mono_crash.*
+
+# NuGet y Paquetes de dependencias .NET
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Pruebas y Cobertura .NET
+testResult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# Logs y Diagnósticos
+log/
+logs/
+*.log
+*.dmp
+*.mdmp
+*.vsp
+*.vspx
+*.sap
+
+# ------------------------------------------------------------------------------
+# 2. Node.js & Angular (Frontend)
+# ------------------------------------------------------------------------------
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Salidas de compilación frontend
+dist/
+**/dist/
+tmp/
+**/tmp/
+out-tsc/
+bazel-out/
+/.angular/cache/
+.angular/
+.sass-cache/
+
+# Reportes de pruebas frontend
+coverage/
+**/coverage/
+.nyc_output/
+testem.log
+/typings
+__screenshots__/
+/libpeerconnection.log
+/connect.lock
+
+# ------------------------------------------------------------------------------
+# 3. Archivos Sensibles, Credenciales y Variables de Entorno
+# ------------------------------------------------------------------------------
+# Archivos de entorno
+.env
+.env.*
+!.env.example
+*.env
+
+# Secretos locales de desarrollo .NET
+secrets.json
+**/UserSecrets/
+**/user-secrets/
+appsettings*.local.json
+appsettings.Secrets.json
+appsettings.Production.json
+
+# Llaves privadas y Certificados
+*.pfx
+*.p12
+*.pem
+*.key
+*.cer
+*.crt
+
+# Bases de datos locales
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# ------------------------------------------------------------------------------
+# 4. Editores de Código e IDEs
+# ------------------------------------------------------------------------------
+# JetBrains Rider / WebStorm / IDEA
+.idea/
+*.sln.iml
+
+# Eclipse / NetBeans / Sublime
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+.history/
+
+# Visual Studio Code (mantiene configuraciones de equipo, ignora estado personal)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+
+# ------------------------------------------------------------------------------
+# 5. Sistema Operativo y Almacenamiento en Nube (Windows, OneDrive, macOS)
+# ------------------------------------------------------------------------------
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Archivos temporales / respaldos Office & editores (comunes en carpetas OneDrive)
+~$*
+*.tmp
+*.bak
+*.swp
+*~

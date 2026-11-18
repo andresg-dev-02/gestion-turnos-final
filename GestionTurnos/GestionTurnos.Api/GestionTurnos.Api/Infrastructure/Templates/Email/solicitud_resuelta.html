@@ -1,0 +1,57 @@
+<p style="margin:0 0 16px;font-size:15px;color:#1e293b;">Hola, <strong>{{ modelo.nombre | html.escape }}</strong>:</p>
+
+<p style="margin:0 0 20px;font-size:15px;color:#334155;line-height:1.6;">
+  {{ modelo.mensaje | html.escape }} Resultado:
+  {{ if modelo.positivo }}
+    <span style="display:inline-block;background-color:#ecfdf5;color:#065f46;font-weight:700;padding:2px 10px;border-radius:6px;border:1px solid #a7f3d0;font-size:13px;text-transform:uppercase;">
+      {{ modelo.resultado | html.escape }}
+    </span>
+  {{ else }}
+    <span style="display:inline-block;background-color:#fef2f2;color:#991b1b;font-weight:700;padding:2px 10px;border-radius:6px;border:1px solid #fecaca;font-size:13px;text-transform:uppercase;">
+      {{ modelo.resultado | html.escape }}
+    </span>
+  {{ end }}
+</p>
+
+<!-- Ficha de Detalles de la Solicitud -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background-color:#f8fafc;font-size:14px;">
+  {{ for d in modelo.detalles }}
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;width:40%;border-bottom:1px solid #e2e8f0;vertical-align:top;">
+      {{ d.etiqueta | html.escape }}
+    </td>
+    <td style="padding:10px 16px;color:#1e293b;font-weight:600;border-bottom:1px solid #e2e8f0;">
+      {{ d.valor | html.escape }}
+    </td>
+  </tr>
+  {{ end }}
+</table>
+
+{{ if modelo.motivo }}
+<div style="margin:0 0 20px;padding:14px 18px;background-color:#fef2f2;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;">
+  <span style="display:block;font-size:11px;font-weight:800;color:#991b1b;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">
+    {{ modelo.etiqueta_motivo | html.escape }}
+  </span>
+  <p style="margin:0;font-size:14px;color:#7f1d1d;line-height:1.5;">
+    {{ modelo.motivo | html.escape }}
+  </p>
+</div>
+{{ end }}
+
+{{ if modelo.nota }}
+<p style="margin:0 0 20px;font-size:14px;color:#475569;font-style:italic;">
+  {{ modelo.nota | html.escape }}
+</p>
+{{ end }}
+
+{{ if sistema.url }}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 8px;">
+  <tr>
+    <td align="center">
+      <a href="{{ sistema.url | html.escape }}" style="display:inline-block;padding:14px 32px;background-color:#113459;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(17,52,89,0.2);border-bottom:3px solid #1D768A;">
+        Ingresar al sistema &rarr;
+      </a>
+    </td>
+  </tr>
+</table>
+{{ end }}

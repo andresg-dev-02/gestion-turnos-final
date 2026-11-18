@@ -1,0 +1,106 @@
+<form (submit)="enviar($event)" novalidate class="space-y-4">
+  @if (errorGeneral()) {
+    <div
+      role="alert"
+      class="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-xs font-medium text-red-900"
+    >
+      {{ errorGeneral() }}
+    </div>
+  }
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <ui-notched-select
+      id="reg-tipo-doc"
+      etiqueta="Tipo documento"
+      [obligatorio]="true"
+      [opciones]="opcionesTipoDoc()"
+      [valor]="codTipoDocumento()"
+      [error]="errores()['codTipoDocumento']"
+      (valorCambio)="codTipoDocumento.set($event)"
+    />
+    <ui-notched-field
+      id="reg-num-doc"
+      etiqueta="Número documento"
+      placeholder="Ej. 1020304050"
+      [obligatorio]="true"
+      [valor]="numeroDocumento()"
+      [error]="errores()['numeroDocumento']"
+      (valorCambio)="numeroDocumento.set($event)"
+    />
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <ui-notched-field
+      id="reg-nombres"
+      etiqueta="Nombres"
+      placeholder="Juan Carlos"
+      autocomplete="given-name"
+      [obligatorio]="true"
+      [valor]="nombres()"
+      [error]="errores()['nombres']"
+      (valorCambio)="nombres.set($event)"
+    />
+    <ui-notched-field
+      id="reg-apellidos"
+      etiqueta="Apellidos"
+      placeholder="Pérez Gómez"
+      autocomplete="family-name"
+      [obligatorio]="true"
+      [valor]="apellidos()"
+      [error]="errores()['apellidos']"
+      (valorCambio)="apellidos.set($event)"
+    />
+  </div>
+
+  <ui-notched-field
+    id="reg-correo"
+    etiqueta="Correo electrónico"
+    tipo="email"
+    placeholder="juan.perez@empresa.com"
+    autocomplete="email"
+    [obligatorio]="true"
+    [valor]="correo()"
+    [error]="errores()['correo']"
+    (valorCambio)="correo.set($event)"
+  />
+
+  <ui-notched-field
+    id="reg-telefono"
+    etiqueta="Teléfono (opcional)"
+    tipo="tel"
+    placeholder="300 123 4567"
+    autocomplete="tel"
+    [valor]="telefono()"
+    [error]="errores()['telefono']"
+    (valorCambio)="telefono.set($event)"
+  />
+
+  <ui-notched-field
+    id="reg-contrasena"
+    etiqueta="Contraseña"
+    tipo="password"
+    placeholder="Mínimo 8 caracteres"
+    autocomplete="new-password"
+    ayuda="Debe contener al menos 8 caracteres."
+    [obligatorio]="true"
+    [valor]="contrasena()"
+    [error]="errores()['contrasena']"
+    (valorCambio)="contrasena.set($event)"
+  />
+
+  <div class="pt-1">
+    <ui-button tipo="submit" [anchoCompleto]="true" [cargando]="enviando()">
+      Enviar solicitud
+    </ui-button>
+  </div>
+
+  <p class="pt-1 text-center text-xs text-slate-600">
+    ¿Ya tienes una cuenta activa?
+    <a
+      routerLink="/ingresar"
+      class="ml-1 inline-flex min-h-11 items-center font-bold text-marca-700 underline underline-offset-4 hover:text-marca-800"
+    >
+      Iniciar sesión
+    </a>
+  </p>
+</form>

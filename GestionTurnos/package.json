@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:front\"",
+    "dev:api": "cd GestionTurnos.Api/GestionTurnos.Api && dotnet watch run",
+    "dev:front": "cd GestionTurnos.IU && ng serve"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}

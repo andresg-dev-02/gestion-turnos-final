@@ -1,0 +1,41 @@
+<p style="margin:0 0 16px;font-size:15px;color:#1e293b;">Hola, <strong>{{ modelo.nombre | html.escape }}</strong>:</p>
+
+<p style="margin:0 0 20px;font-size:15px;color:#334155;line-height:1.6;">
+  Nos complace informarle que su solicitud de registro fue
+  <span style="display:inline-block;background-color:#ecfdf5;color:#065f46;font-weight:700;padding:2px 10px;border-radius:6px;border:1px solid #a7f3d0;font-size:13px;text-transform:uppercase;">
+    Aprobada
+  </span>.
+  Ya puede acceder a la plataforma con su correo electrónico y la contraseña que configuró.
+</p>
+
+<!-- Ficha de Datos Institucional -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background-color:#f8fafc;font-size:14px;">
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;width:35%;border-bottom:1px solid #e2e8f0;">Usuario / Correo</td>
+    <td style="padding:10px 16px;color:#113459;font-weight:700;border-bottom:1px solid #e2e8f0;">{{ modelo.correo | html.escape }}</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;border-bottom:1px solid #e2e8f0;">Área asignada</td>
+    <td style="padding:10px 16px;color:#1e293b;font-weight:600;border-bottom:1px solid #e2e8f0;">{{ modelo.area | html.escape }}</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;border-bottom:1px solid #e2e8f0;">Cargo</td>
+    <td style="padding:10px 16px;color:#1e293b;font-weight:600;border-bottom:1px solid #e2e8f0;">{{ modelo.cargo | html.escape }}</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 16px;color:#475569;font-weight:600;">Fecha de ingreso</td>
+    <td style="padding:10px 16px;color:#1e293b;font-weight:600;">{{ modelo.fecha_ingreso | html.escape }}</td>
+  </tr>
+</table>
+
+{{ if sistema.url }}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0 8px;">
+  <tr>
+    <td align="center">
+      <a href="{{ sistema.url | html.escape }}" style="display:inline-block;padding:14px 32px;background-color:#113459;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:700;font-size:15px;box-shadow:0 2px 4px rgba(17,52,89,0.2);border-bottom:3px solid #1D768A;">
+        Ingresar al sistema &rarr;
+      </a>
+    </td>
+  </tr>
+</table>
+{{ end }}
